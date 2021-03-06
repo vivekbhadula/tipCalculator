@@ -147,6 +147,13 @@
                             <constraint firstItem="PjP-Nc-CvA" firstAttribute="top" secondItem="hoc-4I-eJO" secondAttribute="bottom" constant="31.5" id="g96-qf-TQr"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="billTextField" destination="hoc-4I-eJO" id="P8K-Gf-NTo"/>
+                        <outlet property="splitNumberLabel" destination="b3A-Bj-XTX" id="eyd-Bf-jaz"/>
+                        <outlet property="tenPctButton" destination="Rwu-A9-VfH" id="4d7-Tp-E9V"/>
+                        <outlet property="twentyPctButton" destination="CKa-YD-tVk" id="zD7-Od-rD5"/>
+                        <outlet property="zeroPctButton" destination="NIj-D2-Uq5" id="L25-vn-X61"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
