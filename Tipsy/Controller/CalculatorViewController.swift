@@ -23,6 +23,7 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
     var text: String? = ""  //text entered in textBox
     var tip: Float = 0  //tip percentage
     var splitterValue: Int = 0 //split between how many people
+    var result: String = ""
     
     @IBAction func getValue(_ sender: UITextField) {
         text = billTextField.text ?? "Empty"    //text field deafault data type is string
@@ -59,7 +60,16 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
     @IBAction func calculatePressed(_ sender: UIButton) {
         let bill = Float(text ?? "error")
         let split = ((bill ?? 0.0) * tip) / Float(splitterValue)
-        print(String(format: "%.2f", split))
+        result = (String(format: "%.2f", split))
+        
+        performSegue(withIdentifier: "goToResult", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToResult" {
+            let destinationVC = segue.destination as! ResultsViewController
+            destinationVC.total = result
+        }
     }
     
 }
