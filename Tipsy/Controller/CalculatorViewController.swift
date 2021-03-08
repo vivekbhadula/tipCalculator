@@ -22,18 +22,19 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
     
     var text: String? = ""  //text entered in textBox
     var tip: Float = 0  //tip percentage
-    var splitterValue: Int = 0 //split between how many people
+    var splitterValue: Int = 2 //split between how many people
     var result: String = ""
+    var percentageSelected: String = ""
     
     @IBAction func getValue(_ sender: UITextField) {
         text = billTextField.text ?? "Empty"    //text field deafault data type is string
     }
     
     @IBAction func tipChanged(_ sender: UIButton) {
-        let percentageSelected = String(sender.currentTitle!)
+        percentageSelected = String(sender.currentTitle!)
         billTextField.endEditing(true)  //to hide the keyboard
         if percentageSelected == "0%" {
-            tip = 0
+            tip = 1.0
             zeroPctButton.isSelected = true
             tenPctButton.isSelected = false
             twentyPctButton.isSelected = false
@@ -67,8 +68,10 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToResult" {
+            // via destinationVC we can tap into the properties of the second view controller
             let destinationVC = segue.destination as! ResultsViewController
             destinationVC.total = result
+            destinationVC.settings = "Split between \(splitterValue) people, \n with \(percentageSelected) tip."
         }
     }
     
