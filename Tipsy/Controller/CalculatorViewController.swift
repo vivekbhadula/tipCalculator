@@ -8,8 +8,8 @@
 
 import UIKit
 
-class CalculatorViewController: UIViewController {
-
+class CalculatorViewController: UIViewController, UITextFieldDelegate {
+    
     @IBOutlet weak var billTextField: UITextField!
     
     @IBOutlet weak var zeroPctButton: UIButton!
@@ -19,6 +19,14 @@ class CalculatorViewController: UIViewController {
     @IBOutlet weak var twentyPctButton: UIButton!
     
     @IBOutlet weak var splitNumberLabel: UILabel!
+    
+    @IBAction func getValue(_ sender: UITextField) {
+        let text: String = billTextField.text ?? "Empty"
+        let alert = UIAlertController(title: "Alert", message: "", preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "Click", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
     
     @IBAction func tipChanged(_ sender: UIButton) {
         let percentageSelected = String(sender.currentTitle!)
@@ -47,7 +55,5 @@ class CalculatorViewController: UIViewController {
         print(self.splitNumberLabel.text ?? "error")
     }
     
-
-
 }
 
