@@ -21,6 +21,7 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var splitNumberLabel: UILabel!
     
     var text: String? = ""
+    var tip: Float = 0
     
     @IBAction func getValue(_ sender: UITextField) {
         text = billTextField.text ?? "Empty"
@@ -30,28 +31,37 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
         let percentageSelected = String(sender.currentTitle!)
         billTextField.endEditing(true)
         if percentageSelected == "0%" {
+            tip = 0
             zeroPctButton.isSelected = true
             tenPctButton.isSelected = false
             twentyPctButton.isSelected = false
         }
         else if percentageSelected == "10%" {
+            tip = 1.1
             zeroPctButton.isSelected = false
             tenPctButton.isSelected = true
             twentyPctButton.isSelected = false
         }
         else {
+            tip = 1.2
             zeroPctButton.isSelected = false
             tenPctButton.isSelected = false
             twentyPctButton.isSelected = true
         }
     }
     
+    var splitterValue: String = ""
+    
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
-        self.splitNumberLabel.text = Int(sender.value).description
+        splitterValue = Int(sender.value).description
+        self.splitNumberLabel.text = splitterValue
     }
     
     @IBAction func calculatePressed(_ sender: UIButton) {
-        print(self.splitNumberLabel.text ?? "error")
+        let bill = Float(text ?? "error")
+        let split = ((bill ?? 0.0) * tip)
+        let totalPay = split / Float(splitterValue)!
+        print(String(format: "%.2f", totalPay))
     }
     
 }
