@@ -20,16 +20,15 @@ class CalculatorViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var splitNumberLabel: UILabel!
     
+    var text: String? = ""
+    
     @IBAction func getValue(_ sender: UITextField) {
-        let text: String = billTextField.text ?? "Empty"
-        let alert = UIAlertController(title: "Alert", message: "", preferredStyle: UIAlertController.Style.alert)
-        
-        alert.addAction(UIAlertAction(title: "Click", style: UIAlertAction.Style.default, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        text = billTextField.text ?? "Empty"
     }
     
     @IBAction func tipChanged(_ sender: UIButton) {
         let percentageSelected = String(sender.currentTitle!)
+        billTextField.endEditing(true)
         if percentageSelected == "0%" {
             zeroPctButton.isSelected = true
             tenPctButton.isSelected = false
